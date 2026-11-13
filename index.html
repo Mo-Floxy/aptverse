@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APTverse — Aptech Student Network</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css?v=20260807-responsive">
+
+</head>
+
+<body>
+  <!-- SPLASH SCREEN -->
+  <div id="splash">
+    <canvas class="splash-canvas" id="splashCanvas" aria-hidden="true"></canvas>
+    <div class="splash-frame splash-frame-one" aria-hidden="true"></div>
+    <div class="splash-frame splash-frame-two" aria-hidden="true"></div>
+    <div class="splash-content">
+      <div class="splash-kicker"><span></span> APTECH STUDENT NETWORK</div>
+      <div class="splash-logo">APT<span>verse</span></div>
+      <div class="splash-tagline">All of Aptech, in one universe</div>
+      <div class="splash-bar-wrap" aria-label="Loading APTverse">
+        <div class="splash-bar" id="splashBar"></div>
+      </div>
+      <div class="splash-loading-row"><span class="splash-status" id="splashStatus">Preparing your network</span><span
+          class="splash-percent" id="splashPercent">0%</span></div>
+    </div>
+    <div class="splash-footer">STUDENTS · ALUMNI · OPPORTUNITY</div>
+  </div>
+  <nav>
+    <div class="logo" onclick="showPage('home',null)">APT<span>verse <button class="hamburger-mobile"
+          id="hamburgerMobile" onclick="toggleMobileMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button></span></div>
+    <div class="nav-links" id="navLinks">
+      <button class="nav-btn active" onclick="showPage('home',this)">Home</button>
+      <button class="nav-btn" onclick="showPage('feed',this)">Feed</button>
+      <button class="nav-btn" onclick="showPage('profile',this)">Profile</button>
+      <button class="nav-btn" onclick="showPage('alumni',this)">Alumni</button>
+      <button class="nav-btn" onclick="showPage('jobs',this)">Jobs</button>
+      <div class="more-wrap">
+        <button class="nav-btn more-trigger" onclick="toggleMore(event)">More ▾</button>
+        <div class="more-dropdown" id="moreDropdown">
+          <button class="more-item" onclick="showPage('chat',this);closeMore()">💬 Messages</button>
+          <button class="more-item" onclick="showPage('mentorship',this);closeMore()">🤝 Mentorship</button>
+          <button class="more-item" onclick="showPage('showcase',this);closeMore()">🚀 Showcase</button>
+          <button class="more-item" onclick="showPage('events',this);closeMore()">🎉 Events</button>
+          <button class="more-item" onclick="showPage('notifications',this);closeMore()">🔔 Notifications</button>
+          <button class="more-item" onclick="showPage('settings',this);closeMore()">⚙️ Settings</button>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
+      <div class="notif-wrap">
+        <button class="notif-bell" onclick="toggleNotif(event)" id="notifBell">🔔<span class="notif-count"
+            id="notifCount">4</span></button>
+        <div class="notif-dropdown" id="notifDropdown">
+          <div class="notif-header"><span>Notifications</span><button class="notif-mark-all"
+              onclick="markAllRead()">Mark
+              all read</button></div>
+          <div class="notif-tabs">
+            <button class="notif-tab active" onclick="filterNotif('all',this)">All</button>
+            <button class="notif-tab" onclick="filterNotif('unread',this)">Unread</button>
+            <button class="notif-tab" onclick="filterNotif('mentions',this)">Mentions</button>
+          </div>
+          <div class="notif-list" id="notifList"></div>
+          <div class="notif-footer"><a href="#">View all notifications</a></div>
+        </div>
+      </div>
+      <button class="nav-cta" onclick="showPage('auth',null)">Sign In</button>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <canvas class="hero-canvas" id="networkCanvas"></canvas>
+      <div class="hero-content">
+        <div class="badge">🎓 Aptech Worldwide · Exclusive Network</div>
+        <h1>Where Aptech <span class="accent">Students</span> &amp; Alumni <span class="accent">Connect</span></h1>
+        <p>Share your journey, find mentors, discover opportunities, and build your career within the Aptech community.
+        </p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('feed',document.querySelectorAll('.nav-btn')[1])">Explore the
+            Feed</button>
+          <button class="btn-outline" onclick="showPage('alumni',document.querySelectorAll('.nav-btn')[3])">Browse
+            Alumni</button>
+        </div>
+        <div class="hero-signal" aria-live="polite"><span class="hero-signal-dot"></span><span id="heroSignalText">87
+            builders are active right now</span></div>
+      </div>
+      <div class="hero-activity" aria-hidden="true">
+        <span><b>AO</b> Amaka shared a role</span>
+        <span><b>KE</b> Kelechi launched a project</span>
+        <span><b>TO</b> Tunde opened mentorship slots</span>
+      </div>
+      <button class="home-scroll-cue" type="button" title="Explore APTverse" aria-label="Explore APTverse"
+        onclick="document.querySelector('.stats-bar').scrollIntoView({behavior:'smooth'})">↓</button>
+    </div>
+    <div class="community-ticker" aria-label="Community activity">
+      <div class="ticker-track">
+        <span>Live community activity</span><i></i><span>12 new opportunities this week</span><i></i><span>87 builders
+          online</span><i></i><span>Mentors available across 6 specialties</span><i></i><span>Projects from Lagos to
+          London</span><i></i>
+        <span>Live community activity</span><i></i><span>12 new opportunities this week</span><i></i><span>87 builders
+          online</span><i></i><span>Mentors available across 6 specialties</span><i></i><span>Projects from Lagos to
+          London</span><i></i>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num" data-count="7500000" data-suffix="+">7.5M+</div>
+        <div class="stat-label">Learners Trained</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="740" data-suffix="+">740+</div>
+        <div class="stat-label">Training Centres</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="200" data-suffix="+">200+</div>
+        <div class="stat-label">Cities Worldwide</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="40" data-suffix="+">40+</div>
+        <div class="stat-label">Countries Reached</div>
+      </div>
+    </div>
+    <div class="features">
+      <div class="section-title">Everything you need to grow</div>
+      <div class="section-sub">Built for the Aptech community, by the Aptech community</div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon">📰</div>
+          <h3>Live Feed</h3>
+          <p>Share updates, projects, and achievements with your classmates.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🎓</div>
+          <h3>Alumni Directory</h3>
+          <p>Find and connect with Aptech graduates working across Nigeria and the world.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">💼</div>
+          <h3>Job Board</h3>
+          <p>Exclusive internships and full-time roles posted by alumni and partner companies.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🤝</div>
+          <h3>Mentorship</h3>
+          <p>Get matched with experienced alumni for career guidance and project feedback.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🚀</div>
+          <h3>Project Showcase</h3>
+          <p>Display your school and personal projects to potential employers.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">💬</div>
+          <h3>Real-time Chat</h3>
+          <p>DM classmates and alumni directly. Form study groups and collaborate.</p>
+        </div>
+      </div>
+      <!-- ABOUT / LANDING SECTION -->
+      <section class="about-section">
+        <div class="about-inner">
+
+          <!-- How it works -->
+          <div class="about-how">
+            <div class="about-label">How it works</div>
+            <h2 class="about-title">Get started in <span>3 simple steps</span></h2>
+            <div class="steps-grid">
+              <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-icon">🎓</div>
+                <h3>Create your profile</h3>
+                <p>Sign up with your Aptech student ID, add your skills, projects and semester. Get verified instantly.
+                </p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-icon">🔗</div>
+                <h3>Connect &amp; explore</h3>
+                <p>Follow classmates, connect with alumni, join the feed and discover mentors in your field of interest.
+                </p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-icon">🚀</div>
+                <h3>Grow your career</h3>
+                <p>Apply for jobs, showcase your projects, attend events and get guided by professionals who've been
+                  there.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonials -->
+          <div class="about-testimonials">
+            <div class="about-label">What students say</div>
+            <h2 class="about-title">Loved by the <span>Aptech community</span></h2>
+            <div class="testimonials-grid">
+              <div class="testimonial-card">
+                <div class="tcard-quote">"APTverse connected me with an Andela engineer who reviewed my CV and referred
+                  me. I
+                  got the job within 3 weeks."</div>
+                <div class="tcard-author">
+                  <div class="tcard-av" style="background:#7C3AED">AO</div>
+                  <div>
+                    <div class="tcard-name">Amaka Okonkwo</div>
+                    <div class="tcard-role">Software Engineer · Flutterwave</div>
+                  </div>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="tcard-quote">"I found my first internship through the APTverse job board. The alumni network
+                  is
+                  incredibly supportive."</div>
+                <div class="tcard-author">
+                  <div class="tcard-av" style="background:#059669">KE</div>
+                  <div>
+                    <div class="tcard-name">Kelechi Eze</div>
+                    <div class="tcard-role">Student · Semester 4</div>
+                  </div>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="tcard-quote">"The project showcase helped me get noticed by a recruiter at Paystack before I
+                  even
+                  graduated. Game changer."</div>
+                <div class="tcard-author">
+                  <div class="tcard-av" style="background:#DC2626">FN</div>
+                  <div>
+                    <div class="tcard-name">Fatima Nwosu</div>
+                    <div class="tcard-role">Backend Engineer · Paystack</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Banner -->
+          <div class="about-cta">
+            <h2>Ready to join the <span>APTverse</span>?</h2>
+            <p>Over 2,000 Aptech students and alumni are already connected. Your next opportunity is one click away.</p>
+            <div class="about-cta-btns">
+              <button class="btn-primary" onclick="showPage('auth',null)">Create Free Account</button>
+              <button class="btn-outline" onclick="showPage('feed',document.querySelectorAll('.nav-btn')[1])">Browse the
+                Feed</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- FEED -->
+  <div class="page" id="page-feed">
+    <div class="feed-layout">
+      <div>
+        <div class="post-composer">
+          <div class="composer-row">
+            <div class="avatar">MF</div><textarea class="composer-input" rows="3"
+              placeholder="Share an update, project, or question..."></textarea>
+          </div>
+          <div class="composer-actions"><button class="btn-post">Post</button></div>
+        </div>
+        <div class="feed-post">
+          <div class="post-header">
+            <div class="avatar" style="background:#7C3AED">AO</div>
+            <div class="post-meta">
+              <div class="post-name">Amaka Okonkwo <span class="post-badge">Alumni</span></div>
+              <div class="post-info">Software Engineer @ Flutterwave · 2h ago</div>
+            </div>
+          </div>
+          <div class="post-text">Just joined Flutterwave as a Software Engineer! 🚀 If you're in Semester 3+ and want to
+            break into fintech, DM me. The Aptech foundation was everything.</div>
+          <div class="post-actions"><button class="post-action">👍 Like · 48</button><button class="post-action">💬
+              Comment · 12</button><button class="post-action">🔗 Share</button><button
+              class="post-action post-msg-btn">Message</button></div>
+        </div>
+        <div class="feed-post">
+          <div class="post-header">
+            <div class="avatar" style="background:#059669">KE</div>
+            <div class="post-meta">
+              <div class="post-name">Kelechi Eze <span class="post-badge">Student · Sem 4</span></div>
+              <div class="post-info">Lagos, Nigeria · 5h ago</div>
+            </div>
+          </div>
+          <div class="post-text">Just pushed my city guide Flutter app live! Clean Architecture + Riverpod + Firebase
+            👇<br><br>🔗 github.com/kelechi/city-guide-ng</div>
+          <div class="post-actions"><button class="post-action">👍 Like · 31</button><button class="post-action">💬
+              Comment · 8</button><button class="post-action">🔗 Share</button><button
+              class="post-action post-msg-btn">Message</button></div>
+        </div>
+        <div class="feed-post">
+          <div class="post-header">
+            <div class="avatar" style="background:#DC2626">TO</div>
+            <div class="post-meta">
+              <div class="post-name">Tunde Olawale <span class="post-badge">Alumni</span></div>
+              <div class="post-info">Full-Stack Dev @ Andela · 1d ago</div>
+            </div>
+          </div>
+          <div class="post-text">Free workshop this Saturday: "Breaking into tech without experience." Portfolio
+            building, cold outreach, Aptech projects. Virtual — link in comments.</div>
+          <div class="post-actions"><button class="post-action">👍 Like · 94</button><button class="post-action">💬
+              Comment · 27</button><button class="post-action">🔗 Share</button><button
+              class="post-action post-msg-btn">Message</button></div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">People to connect with</div>
+          <div class="mini-profile">
+            <div class="avatar" style="width:34px;height:34px;font-size:0.75rem;background:#0EA5E9">BD</div>
+            <div>
+              <div class="mini-name">Bisi Daniel</div>
+              <div class="mini-role">UI/UX Designer</div>
+            </div><button class="connect-btn">Connect</button>
+          </div>
+          <div class="mini-profile">
+            <div class="avatar" style="width:34px;height:34px;font-size:0.75rem;background:#7C3AED">FN</div>
+            <div>
+              <div class="mini-name">Fatima Nwosu</div>
+              <div class="mini-role">Backend Dev</div>
+            </div><button class="connect-btn">Connect</button>
+          </div>
+          <div class="mini-profile">
+            <div class="avatar" style="width:34px;height:34px;font-size:0.75rem;background:#059669">IO</div>
+            <div>
+              <div class="mini-name">Ifeanyi Obi</div>
+              <div class="mini-role">Data Analyst</div>
+            </div><button class="connect-btn">Connect</button>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">Trending topics</div>
+          <div style="font-size:0.82rem;color:var(--gray);line-height:2">
+            #FlutterNigeria<br>#ApttechGraduate<br>#FinTechNG<br>#JavaScript<br>#CareerTips</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="page" id="page-profile">
+    <div class="profile-hero">
+      <div class="profile-inner">
+        <div class="profile-top">
+          <div class="profile-avatar">MF</div>
+          <div style="flex:1">
+            <div class="profile-name">Mo Flourish</div>
+            <div class="profile-title">Software Engineering Student · Aptech Learning Lagos</div>
+            <div class="profile-loc">📍 Lagos, Nigeria · Semester 3</div>
+            <div class="profile-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span><span
+                class="tag">React</span><span class="tag">Python</span><span class="tag">Java</span><span
+                class="tag">JavaScript</span></div>
+          </div><button class="btn-primary" style="flex-shrink:0">Edit Profile</button>
+        </div>
+        <div class="profile-stats">
+          <div class="pstat">
+            <div class="pstat-num">48</div>
+            <div class="pstat-label">Connections</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">12</div>
+            <div class="pstat-label">Posts</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">3</div>
+            <div class="pstat-label">Projects</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">2</div>
+            <div class="pstat-label">Mentors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-body">
+      <div>
+        <div class="section-card">
+          <h3><span class="dot"></span> About</h3>
+          <p style="color:#aaa;font-size:0.88rem;line-height:1.7">Passionate software engineering student at Aptech
+            Learning Lagos. Building apps that solve real problems — from city guides to social platforms.</p>
+        </div>
+        <div class="section-card">
+          <h3><span class="dot"></span> Projects</h3>
+          <div class="exp-item">
+            <div class="exp-icon">🌆</div>
+            <div>
+              <div class="exp-title">City Guide App</div>
+              <div class="exp-sub">Flutter · Firebase · Riverpod · GoRouter</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-icon">✅</div>
+            <div>
+              <div class="exp-title">Taskr — To-do Web App</div>
+              <div class="exp-sub">HTML · CSS · JavaScript · localStorage</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-icon">🌐</div>
+            <div>
+              <div class="exp-title">APTverse — Social Platform</div>
+              <div class="exp-sub">HTML · CSS · JavaScript (In Progress)</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-card">
+          <h3><span class="dot"></span> Skills</h3>
+          <div class="skill-pills"><span class="skill-pill">Flutter</span><span class="skill-pill">Dart</span><span
+              class="skill-pill">Firebase</span><span class="skill-pill">React</span><span
+              class="skill-pill">JavaScript</span><span class="skill-pill">Python</span><span
+              class="skill-pill">Java</span><span class="skill-pill">HTML/CSS</span><span class="skill-pill">Spring
+              Boot</span><span class="skill-pill">Git</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-card">
+          <div class="sidebar-title">Education</div>
+          <div class="exp-item" style="border:none;padding:0;margin:0">
+            <div class="exp-icon">🎓</div>
+            <div>
+              <div class="exp-title">Aptech Learning</div>
+              <div class="exp-sub">Software Engineering · 2023 – Present</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="sidebar-title">Mentors</div>
+          <div class="mini-profile" style="margin-bottom:0.5rem">
+            <div class="avatar" style="width:34px;height:34px;font-size:0.75rem;background:#7C3AED">AO</div>
+            <div>
+              <div class="mini-name" style="font-size:0.82rem">Amaka Okonkwo</div>
+              <div class="mini-role">Flutterwave</div>
+            </div>
+          </div>
+          <div class="mini-profile">
+            <div class="avatar" style="width:34px;height:34px;font-size:0.75rem;background:#059669">TO</div>
+            <div>
+              <div class="mini-name" style="font-size:0.82rem">Tunde Olawale</div>
+              <div class="mini-role">Andela</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALUMNI -->
+  <div class="page" id="page-alumni">
+    <div class="alumni-page">
+      <div class="jobs-header">
+        <div>
+          <h2>Alumni Directory</h2>
+          <p style="color:var(--gray);font-size:0.85rem;margin-top:4px">Connect with 850+ Aptech graduates worldwide</p>
+        </div>
+      </div>
+      <div class="search-row"><input class="search-input" placeholder="Search by name, company, or skill..."><button
+          class="filter-btn active">All</button><button class="filter-btn">Nigeria</button><button
+          class="filter-btn">Abroad</button><button class="filter-btn">Open to mentor</button></div>
+      <div class="alumni-grid">
+        <div class="alumni-card">
+          <div class="a-avatar" style="background:#7C3AED">AO</div>
+          <div class="a-name">Amaka Okonkwo</div>
+          <div class="a-role">Software Engineer</div>
+          <div class="a-company">Flutterwave</div>
+          <div class="a-tags"><span class="a-tag">Flutter</span><span class="a-tag">React</span><span
+              class="a-tag">Node</span></div><button class="a-connect">Connect</button>
+        </div>
+        <div class="alumni-card">
+          <div class="a-avatar" style="background:#059669">TO</div>
+          <div class="a-name">Tunde Olawale</div>
+          <div class="a-role">Full-Stack Developer</div>
+          <div class="a-company">Andela</div>
+          <div class="a-tags"><span class="a-tag">Python</span><span class="a-tag">Django</span><span
+              class="a-tag">AWS</span></div><button class="a-connect">Connect</button>
+        </div>
+        <div class="alumni-card">
+          <div class="a-avatar" style="background:#DC2626">FN</div>
+          <div class="a-name">Fatima Nwosu</div>
+          <div class="a-role">Backend Engineer</div>
+          <div class="a-company">Paystack</div>
+          <div class="a-tags"><span class="a-tag">Java</span><span class="a-tag">Spring</span><span
+              class="a-tag">SQL</span></div><button class="a-connect">Connect</button>
+        </div>
+        <div class="alumni-card">
+          <div class="a-avatar" style="background:#0EA5E9">CD</div>
+          <div class="a-name">Chidi Dike</div>
+          <div class="a-role">DevOps Engineer</div>
+          <div class="a-company">Microsoft (UK)</div>
+          <div class="a-tags"><span class="a-tag">Docker</span><span class="a-tag">K8s</span><span
+              class="a-tag">Azure</span></div><button class="a-connect">Connect</button>
+        </div>
+        <div class="alumni-card">
+          <div class="a-avatar" style="background:#F59E0B">RA</div>
+          <div class="a-name">Rashida Adeyemi</div>
+          <div class="a-role">UI/UX Designer</div>
+          <div class="a-company">Interswitch</div>
+          <div class="a-tags"><span class="a-tag">Figma</span><span class="a-tag">Design</span><span
+              class="a-tag">Research</span></div><button class="a-connect">Connect</button>
+        </div>
+        <div class="alumni-card">
+          <div class="a-avatar" style="background:#6366F1">JO</div>
+          <div class="a-name">James Obiora</div>
+          <div class="a-role">Mobile Developer</div>
+          <div class="a-company">Kuda Bank</div>
+          <div class="a-tags"><span class="a-tag">Flutter</span><span class="a-tag">Kotlin</span><span
+              class="a-tag">Firebase</span></div><button class="a-connect">Connect</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOBS -->
+  <div class="page" id="page-jobs">
+    <div class="jobs-page">
+      <div class="jobs-header">
+        <div>
+          <h2>Job Board</h2>
+          <p style="color:var(--gray);font-size:0.85rem;margin-top:4px">140 open roles · Updated today</p>
+        </div><button class="post-job-btn">+ Post a Role</button>
+      </div>
+      <div class="job-filters"><button class="jfilter active">All</button><button
+          class="jfilter">Internship</button><button class="jfilter">Full-time</button><button
+          class="jfilter">Remote</button><button class="jfilter">Flutter</button><button
+          class="jfilter">Frontend</button><button class="jfilter">Backend</button></div>
+      <div class="job-card">
+        <div class="job-logo">🏦</div>
+        <div class="job-info">
+          <div class="job-title">Junior Flutter Developer</div>
+          <div class="job-company">Kuda Bank · Lagos</div>
+          <div class="job-meta"><span class="job-tag featured">Featured</span><span
+              class="job-tag">Full-time</span><span class="job-tag">Flutter</span></div>
+        </div>
+        <div class="job-right">
+          <div class="job-salary">₦180k/mo</div>
+          <div class="job-deadline">Closes Jul 10</div><button class="apply-btn">Apply</button>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo">💸</div>
+        <div class="job-info">
+          <div class="job-title">Frontend Engineer Intern</div>
+          <div class="job-company">Flutterwave · Remote</div>
+          <div class="job-meta"><span class="job-tag">Internship</span><span class="job-tag">React</span><span
+              class="job-tag">Remote</span></div>
+        </div>
+        <div class="job-right">
+          <div class="job-salary">₦120k/mo</div>
+          <div class="job-deadline">Closes Jul 5</div><button class="apply-btn">Apply</button>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo">💳</div>
+        <div class="job-info">
+          <div class="job-title">Backend Developer (Java)</div>
+          <div class="job-company">Paystack · Lagos</div>
+          <div class="job-meta"><span class="job-tag featured">Alumni Posted</span><span
+              class="job-tag">Full-time</span><span class="job-tag">Java</span></div>
+        </div>
+        <div class="job-right">
+          <div class="job-salary">₦250k/mo</div>
+          <div class="job-deadline">Closes Jul 20</div><button class="apply-btn">Apply</button>
+        </div>
+      </div>
+      <div class="job-card">
+        <div class="job-logo">📱</div>
+        <div class="job-info">
+          <div class="job-title">Mobile Developer Intern</div>
+          <div class="job-company">PiggyVest · Lagos</div>
+          <div class="job-meta"><span class="job-tag">Internship</span><span class="job-tag">Flutter</span><span
+              class="job-tag">Kotlin</span></div>
+        </div>
+        <div class="job-right">
+          <div class="job-salary">₦100k/mo</div>
+          <div class="job-deadline">Closes Jun 30</div><button class="apply-btn">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="page" id="page-chat">
+    <div class="chat-layout">
+      <div class="chat-sidebar">
+        <div class="chat-sidebar-header"><span>Messages</span><button class="new-chat-btn">+</button></div>
+        <div class="chat-search"><input type="text" placeholder="Search conversations..."></div>
+        <div class="chat-list" id="chatList"></div>
+      </div>
+      <div class="chat-main" id="chatMain">
+        <div class="chat-empty" id="chatEmpty">
+          <div class="chat-empty-icon">💬</div>
+          <h3>Select a conversation</h3>
+          <p>Choose someone from the list to start chatting</p>
+        </div>
+        <div id="activeChatWrap" style="display:none;flex-direction:column;flex:1;height:100%">
+          <div class="chat-topbar"><button class="chat-back-btn" onclick="closeMobileChat()">←</button>
+            <div class="ct-avatar" id="ctAvatar"></div>
+            <div class="ct-info">
+              <div class="ct-name" id="ctName"></div>
+              <div class="ct-status" id="ctStatus"></div>
+            </div>
+            <div class="ct-actions"><button class="ct-action-btn" onclick="openCallChooser('audio')"
+                title="Start audio call">📞</button><button class="ct-action-btn" onclick="openCallChooser('video')"
+                title="Start video call">📹</button><button class="ct-action-btn" title="View profile">👤</button></div>
+          </div>
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-area">
+            <div class="chat-input-row">
+              <div class="chat-input-wrap"><button class="attach-btn">📎</button><textarea class="chat-textarea"
+                  id="chatTextarea" placeholder="Type a message..." rows="1"></textarea></div><button class="send-btn"
+                onclick="sendMessage()">➤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENTORSHIP -->
+  <div class="page" id="page-mentorship">
+    <div class="mentorship-page">
+      <div class="mentorship-hero">
+        <div class="mh-text">
+          <h2>Find Your <span>Mentor</span></h2>
+          <p>Connect with experienced Aptech alumni who've walked your path. Get guidance on career, projects, and
+            breaking into the industry.</p>
+        </div>
+        <div class="mh-stats">
+          <div class="mh-stat">
+            <div class="mh-stat-num">60</div>
+            <div class="mh-stat-label">Active Mentors</div>
+          </div>
+          <div class="mh-stat">
+            <div class="mh-stat-num">320</div>
+            <div class="mh-stat-label">Students Guided</div>
+          </div>
+          <div class="mh-stat">
+            <div class="mh-stat-num">4.8★</div>
+            <div class="mh-stat-label">Avg Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="mentorship-layout">
+        <div>
+          <div class="m-filterbar"><input class="m-search" placeholder="Search mentors by skill or role..."><button
+              class="m-filter active">All</button><button class="m-filter">Mobile</button><button
+              class="m-filter">Backend</button><button class="m-filter">Frontend</button><button
+              class="m-filter">DevOps</button><button class="m-filter">Design</button></div>
+          <div class="mentor-grid" id="mentorGrid"></div>
+        </div>
+        <div>
+          <div class="sidebar-card active-mentors">
+            <h3>Your Mentors</h3>
+            <div class="active-mentor-card">
+              <div class="am-av" style="background:#7C3AED">AO</div>
+              <div class="am-info">
+                <div class="am-name">Amaka Okonkwo</div>
+                <div class="am-next">Next session: Tomorrow, 3pm</div>
+              </div><button class="am-msg-btn"
+                onclick="showPage('chat',document.querySelectorAll('.nav-btn')[5])">Message</button>
+            </div>
+            <div class="active-mentor-card">
+              <div class="am-av" style="background:#059669">TO</div>
+              <div class="am-info">
+                <div class="am-name">Tunde Olawale</div>
+                <div class="am-next">Next session: Saturday, 2pm</div>
+              </div><button class="am-msg-btn"
+                onclick="showPage('chat',document.querySelectorAll('.nav-btn')[5])">Message</button>
+            </div>
+          </div>
+          <div class="progress-card">
+            <h3>🎯 My Mentorship Goals</h3>
+            <div class="goal-item">
+              <div class="goal-top"><span class="goal-label">Land first internship</span><span
+                  class="goal-pct">65%</span></div>
+              <div class="goal-bar">
+                <div class="goal-fill" style="width:65%"></div>
+              </div>
+            </div>
+            <div class="goal-item">
+              <div class="goal-top"><span class="goal-label">Build portfolio project</span><span
+                  class="goal-pct">80%</span></div>
+              <div class="goal-bar">
+                <div class="goal-fill" style="width:80%"></div>
+              </div>
+            </div>
+            <div class="goal-item">
+              <div class="goal-top"><span class="goal-label">Master Flutter advanced</span><span
+                  class="goal-pct">45%</span></div>
+              <div class="goal-bar">
+                <div class="goal-fill" style="width:45%"></div>
+              </div>
+            </div>
+            <div class="goal-item">
+              <div class="goal-top"><span class="goal-label">Resume &amp; LinkedIn ready</span><span
+                  class="goal-pct">90%</span></div>
+              <div class="goal-bar">
+                <div class="goal-fill" style="width:90%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <div class="sidebar-title">💡 Mentorship Tips</div>
+            <div style="font-size:0.82rem;color:#aaa;line-height:1.8">✔ Come prepared with specific questions<br>✔ Share
+              your goals in the first session<br>✔ Follow up on action items weekly<br>✔ Be consistent — mentors value
+              reliability<br>✔ Share your wins, not just your challenges</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SHOWCASE -->
+  <div class="page" id="page-showcase">
+    <div class="showcase-page">
+      <div class="showcase-hero">
+        <div class="sh-text">
+          <h2>Project <span>Showcase</span></h2>
+          <p>Explore what Aptech students are building. Get inspired, give feedback, and share your own projects with
+            the community.</p>
+        </div>
+        <div class="sh-actions">
+          <button class="add-project-btn" onclick="openSubmitModal()">+ Submit Project</button>
+        </div>
+      </div>
+
+      <div class="showcase-filters">
+        <input class="sc-search" placeholder="Search projects...">
+        <button class="sc-filter active">All</button>
+        <button class="sc-filter">Mobile</button>
+        <button class="sc-filter">Web</button>
+        <button class="sc-filter">Backend</button>
+        <button class="sc-filter">AI/ML</button>
+        <button class="sc-filter">Games</button>
+      </div>
+
+      <div class="showcase-layout">
+        <div class="project-grid" id="projectGrid"></div>
+        <div>
+          <!-- Leaderboard -->
+          <div class="leaderboard-card">
+            <div class="sidebar-title">🏆 Top Builders</div>
+            <div class="lb-item">
+              <div class="lb-rank gold">1</div>
+              <div class="lb-av" style="background:var(--orange)">MF</div>
+              <div class="lb-info">
+                <div class="lb-name">Mo Flourish</div>
+                <div class="lb-projects">3 projects</div>
+              </div>
+              <div class="lb-likes">❤ 142</div>
+            </div>
+            <div class="lb-item">
+              <div class="lb-rank silver">2</div>
+              <div class="lb-av" style="background:#059669">KE</div>
+              <div class="lb-info">
+                <div class="lb-name">Kelechi Eze</div>
+                <div class="lb-projects">4 projects</div>
+              </div>
+              <div class="lb-likes">❤ 128</div>
+            </div>
+            <div class="lb-item">
+              <div class="lb-rank bronze">3</div>
+              <div class="lb-av" style="background:#0EA5E9">IO</div>
+              <div class="lb-info">
+                <div class="lb-name">Ifeanyi Obi</div>
+                <div class="lb-projects">2 projects</div>
+              </div>
+              <div class="lb-likes">❤ 97</div>
+            </div>
+            <div class="lb-item">
+              <div class="lb-rank" style="color:var(--gray)">4</div>
+              <div class="lb-av" style="background:#DC2626">AS</div>
+              <div class="lb-info">
+                <div class="lb-name">Adaeze Sylva</div>
+                <div class="lb-projects">3 projects</div>
+              </div>
+              <div class="lb-likes">❤ 84</div>
+            </div>
+            <div class="lb-item">
+              <div class="lb-rank" style="color:var(--gray)">5</div>
+              <div class="lb-av" style="background:#6366F1">BO</div>
+              <div class="lb-info">
+                <div class="lb-name">Biodun Okafor</div>
+                <div class="lb-projects">2 projects</div>
+              </div>
+              <div class="lb-likes">❤ 71</div>
+            </div>
+          </div>
+          <!-- Tags cloud -->
+          <div class="sidebar-card">
+            <div class="sidebar-title">🔖 Popular Tags</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+              <span class="project-tag" style="cursor:pointer">#Flutter</span>
+              <span class="project-tag" style="cursor:pointer">#Firebase</span>
+              <span class="project-tag" style="cursor:pointer">#React</span>
+              <span class="project-tag" style="cursor:pointer">#Python</span>
+              <span class="project-tag" style="cursor:pointer">#Java</span>
+              <span class="project-tag" style="cursor:pointer">#NodeJS</span>
+              <span class="project-tag" style="cursor:pointer">#SpringBoot</span>
+              <span class="project-tag" style="cursor:pointer">#MachineLearning</span>
+              <span class="project-tag" style="cursor:pointer">#HTML</span>
+              <span class="project-tag" style="cursor:pointer">#GameDev</span>
+            </div>
+          </div>
+          <!-- Submit CTA -->
+          <div class="sidebar-card" style="text-align:center">
+            <div style="font-size:2rem;margin-bottom:0.5rem">🚀</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:0.92rem;margin-bottom:0.4rem">Share your
+              work</div>
+            <div style="font-size:0.8rem;color:var(--gray);margin-bottom:1rem;line-height:1.5">Your project could
+              inspire the next Aptech student</div>
+            <button class="add-project-btn" style="width:100%" onclick="openSubmitModal()">+ Submit Project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Project Modal -->
+  <div class="modal-overlay" id="submitModal">
+    <div class="modal" style="max-width:520px">
+      <button class="modal-close" onclick="closeSubmitModal()">✕</button>
+      <h3>Submit Your Project</h3>
+      <p>Share what you've built with the Aptech community</p>
+      <div class="submit-project-form">
+        <div class="sform-field"><label>Project name</label><input type="text" placeholder="e.g. City Guide App"></div>
+        <div class="sform-field"><label>Short description</label><textarea rows="2"
+            placeholder="What does your project do?"></textarea></div>
+        <div class="sform-row">
+          <div><label>Category</label><select>
+              <option disabled selected>Select category</option>
+              <option>Mobile</option>
+              <option>Web</option>
+              <option>Backend</option>
+              <option>AI/ML</option>
+              <option>Games</option>
+            </select></div>
+          <div><label>Stack / Tags</label><input type="text" placeholder="Flutter, Firebase, Dart"></div>
+        </div>
+        <div class="sform-row">
+          <div><label>GitHub link</label><input type="text" placeholder="github.com/you/project"></div>
+          <div><label>Live demo (optional)</label><input type="text" placeholder="https://..."></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-cancel" onclick="closeSubmitModal()">Cancel</button>
+        <button class="modal-send" onclick="submitProject()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- GLOBAL SEARCH OVERLAY -->
+  <div class="search-overlay" id="legacySearchOverlay" onclick="closeSearchOnBg(event)">
+    <div class="search-modal" id="searchModal">
+      <div class="search-input-row">
+        <span class="search-icon">🔍</span>
+        <input class="global-search-input" id="legacyGlobalSearchInput"
+          placeholder="Search students, alumni, projects, jobs..." oninput="runSearch(this.value)">
+        <span class="search-kbd" onclick="closeSearch()">Esc</span>
+      </div>
+      <div class="search-tabs">
+        <button class="search-tab active" onclick="setSearchTab('all',this)">All</button>
+        <button class="search-tab" onclick="setSearchTab('people',this)">People</button>
+        <button class="search-tab" onclick="setSearchTab('projects',this)">Projects</button>
+        <button class="search-tab" onclick="setSearchTab('jobs',this)">Jobs</button>
+        <button class="search-tab" onclick="setSearchTab('posts',this)">Posts</button>
+      </div>
+      <div class="search-results" id="legacySearchResults"></div>
+      <div class="search-footer">
+        <div class="search-hint">↑↓ <span>navigate</span></div>
+        <div class="search-hint">↵ <span>select</span></div>
+        <div class="search-hint">Esc <span>close</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="page" id="page-events">
+    <div class="events-page">
+      <div class="events-hero">
+        <div>
+          <h2>Events &amp; <span>Hackathons</span></h2>
+          <p>Compete, learn, and network at Aptech-exclusive events — hackathons, workshops, career fairs and more.</p>
+        </div>
+        <div class="events-stats">
+          <div class="ev-stat">
+            <div class="ev-stat-num">8</div>
+            <div class="ev-stat-label">Upcoming</div>
+          </div>
+          <div class="ev-stat">
+            <div class="ev-stat-num">₦500k</div>
+            <div class="ev-stat-label">In Prizes</div>
+          </div>
+          <div class="ev-stat">
+            <div class="ev-stat-num">340</div>
+            <div class="ev-stat-label">Registered</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="events-layout">
+        <div>
+          <div class="ev-filterbar">
+            <button class="ev-filter active">All</button>
+            <button class="ev-filter">Hackathon</button>
+            <button class="ev-filter">Workshop</button>
+            <button class="ev-filter">Webinar</button>
+            <button class="ev-filter">Career</button>
+          </div>
+          <div id="eventsList"></div>
+        </div>
+
+        <div>
+          <!-- Mini calendar -->
+          <div class="ev-calendar-card">
+            <div class="ev-calendar-title">📅 July 2026</div>
+            <div class="mini-calendar">
+              <div class="mc-header">
+                <button class="mc-nav">‹</button>
+                <span class="mc-month">July 2026</span>
+                <button class="mc-nav">›</button>
+              </div>
+              <div class="mc-days">
+                <div class="mc-day-label">S</div>
+                <div class="mc-day-label">M</div>
+                <div class="mc-day-label">T</div>
+                <div class="mc-day-label">W</div>
+                <div class="mc-day-label">T</div>
+                <div class="mc-day-label">F</div>
+                <div class="mc-day-label">S</div>
+                <div class="mc-day empty"></div>
+                <div class="mc-day">1</div>
+                <div class="mc-day">2</div>
+                <div class="mc-day">3</div>
+                <div class="mc-day">4</div>
+                <div class="mc-day">5</div>
+                <div class="mc-day">6</div>
+                <div class="mc-day">7</div>
+                <div class="mc-day">8</div>
+                <div class="mc-day today">9</div>
+                <div class="mc-day has-event">10</div>
+                <div class="mc-day">11</div>
+                <div class="mc-day">12</div>
+                <div class="mc-day has-event">13</div>
+                <div class="mc-day">14</div>
+                <div class="mc-day">15</div>
+                <div class="mc-day">16</div>
+                <div class="mc-day has-event">17</div>
+                <div class="mc-day">18</div>
+                <div class="mc-day">19</div>
+                <div class="mc-day">20</div>
+                <div class="mc-day">21</div>
+                <div class="mc-day">22</div>
+                <div class="mc-day has-event">23</div>
+                <div class="mc-day">24</div>
+                <div class="mc-day">25</div>
+                <div class="mc-day has-event">26</div>
+                <div class="mc-day">27</div>
+                <div class="mc-day">28</div>
+                <div class="mc-day">29</div>
+                <div class="mc-day">30</div>
+                <div class="mc-day">31</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- My registrations -->
+          <div class="sidebar-card">
+            <div class="sidebar-title">✅ My Registrations</div>
+            <div style="font-size:0.83rem;color:#aaa;line-height:1.9">
+              🏆 APTverse Hackathon 2026<br>
+              💼 Tech Career Fair Lagos<br>
+              <span style="color:var(--gray);font-size:0.76rem">2 events registered</span>
+            </div>
+          </div>
+
+          <!-- Share CTA -->
+          <div class="sidebar-card" style="text-align:center">
+            <div style="font-size:1.8rem;margin-bottom:0.5rem">📣</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;margin-bottom:0.35rem">Host an
+              Event</div>
+            <div style="font-size:0.79rem;color:var(--gray);margin-bottom:1rem;line-height:1.5">Got a workshop idea?
+              Submit it for the community</div>
+            <button class="register-btn" style="width:100%" onclick="showToast('Event submission coming soon!')">Submit
+              Event</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATIONS -->
+  <div class="page" id="page-notifications">
+    <div class="notif-page">
+      <div class="notif-page-header">
+        <div>
+          <h2>Notifications</h2>
+          <p style="color:var(--gray);font-size:0.85rem;margin-top:4px">Likes, comments, connections, mentors and more —
+            all in one place</p>
+        </div>
+        <button class="notif-mark-all" onclick="markAllRead()">Mark all read</button>
+      </div>
+      <div class="notif-tabs">
+        <button class="notif-tab active" onclick="filterNotifPage('all',this)">All</button>
+        <button class="notif-tab" onclick="filterNotifPage('unread',this)">Unread</button>
+        <button class="notif-tab" onclick="filterNotifPage('mentions',this)">Mentions</button>
+      </div>
+      <div class="section-card notif-page-list" id="notifPageList"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="page" id="page-settings">
+    <div class="settings-page">
+
+      <!-- Left nav -->
+      <div>
+        <div class="settings-nav">
+          <button class="settings-nav-item active" onclick="showSettingsPanel('profile',this)"><span
+              class="s-icon">👤</span> Profile</button>
+          <button class="settings-nav-item" onclick="showSettingsPanel('account',this)"><span class="s-icon">🔐</span>
+            Account</button>
+          <button class="settings-nav-item" onclick="showSettingsPanel('notifications',this)"><span
+              class="s-icon">🔔</span> Notifications</button>
+          <button class="settings-nav-item" onclick="showSettingsPanel('privacy',this)"><span class="s-icon">🛡</span>
+            Privacy</button>
+          <button class="settings-nav-item" onclick="showSettingsPanel('appearance',this)"><span
+              class="s-icon">🎨</span> Appearance</button>
+          <div class="settings-nav-divider"></div>
+          <button class="settings-nav-item" onclick="showSettingsPanel('danger',this)" style="color:#ef4444"><span
+              class="s-icon">⚠️</span> Danger Zone</button>
+        </div>
+      </div>
+
+      <!-- Right panels -->
+      <div>
+
+        <!-- PROFILE -->
+        <div class="settings-panel active" id="spanel-profile">
+          <div class="settings-section">
+            <div class="settings-section-title">👤 <span>Profile</span> Information</div>
+            <div class="avatar-edit">
+              <div class="avatar-lg">MF</div>
+              <div class="avatar-edit-actions">
+                <button class="upload-btn">📷 Upload Photo</button>
+                <button class="upload-btn">🗑 Remove Photo</button>
+              </div>
+            </div>
+            <div class="settings-input-row">
+              <div><label class="settings-label-sm">First name</label><input class="settings-input" value="Mo"
+                  placeholder="First name"></div>
+              <div><label class="settings-label-sm">Last name</label><input class="settings-input" value="Flourish"
+                  placeholder="Last name"></div>
+            </div>
+            <div style="margin-bottom:0.85rem"><label class="settings-label-sm">Display name / Brand</label><input
+                class="settings-input" value="Mo Flourish" placeholder="Your brand name"></div>
+            <div style="margin-bottom:0.85rem"><label class="settings-label-sm">Bio</label><textarea
+                class="settings-input" rows="3"
+                placeholder="Tell the Aptech community about yourself...">Passionate software engineering student at Aptech Learning Lagos. Building apps that solve real problems.</textarea>
+            </div>
+            <div class="settings-input-row">
+              <div><label class="settings-label-sm">Location</label><input class="settings-input"
+                  value="Lagos, Nigeria"></div>
+              <div><label class="settings-label-sm">Semester</label><select class="settings-select">
+                  <option>Semester 1</option>
+                  <option>Semester 2</option>
+                  <option selected>Semester 3</option>
+                  <option>Semester 4</option>
+                  <option>Alumni</option>
+                </select></div>
+            </div>
+            <div style="margin-bottom:0.85rem"><label class="settings-label-sm">GitHub URL</label><input
+                class="settings-input" placeholder="github.com/yourusername"></div>
+            <div style="margin-bottom:1.25rem"><label class="settings-label-sm">LinkedIn URL</label><input
+                class="settings-input" placeholder="linkedin.com/in/yourname"></div>
+            <button class="save-btn" onclick="showToast('Profile saved!')">Save Changes</button>
+          </div>
+        </div>
+
+        <!-- ACCOUNT -->
+        <div class="settings-panel" id="spanel-account">
+          <div class="settings-section">
+            <div class="settings-section-title">🔐 <span>Account</span> &amp; Security</div>
+            <div style="margin-bottom:0.85rem"><label class="settings-label-sm">Email address</label><input
+                class="settings-input" value="mo.flourish@aptech.ng" type="email"></div>
+            <div style="margin-bottom:0.85rem"><label class="settings-label-sm">Student ID <span
+                  class="settings-badge">Verified</span></label><input class="settings-input" value="Student1625690"
+                disabled style="opacity:0.6;cursor:not-allowed"></div>
+            <div class="settings-nav-divider" style="margin-bottom:1rem"></div>
+            <div class="settings-section-title" style="font-size:0.9rem">Change Password</div>
+            <div style="margin-bottom:0.85rem"><label class="settings-label-sm">Current password</label><input
+                class="settings-input" type="password" placeholder="••••••••"></div>
+            <div class="settings-input-row">
+              <div><label class="settings-label-sm">New password</label><input class="settings-input" type="password"
+                  placeholder="••••••••"></div>
+              <div><label class="settings-label-sm">Confirm new</label><input class="settings-input" type="password"
+                  placeholder="••••••••"></div>
+            </div>
+            <button class="save-btn" onclick="showToast('Password updated!')">Update Password</button>
+          </div>
+          <div class="settings-section">
+            <div class="settings-section-title">📱 <span>Active</span> Sessions</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Redmi Note 12 · Chrome <span class="settings-badge">Current</span></div>
+                <div class="setting-desc">Lagos, Nigeria · Just now</div>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Windows PC · Chrome</div>
+                <div class="setting-desc">Lagos, Nigeria · 2 days ago</div>
+              </div><button class="danger-btn" style="padding:0.3rem 0.75rem;font-size:0.75rem"
+                onclick="showToast('Session removed')">Remove</button>
+            </div>
+            <button class="upload-btn" type="button" onclick="signOut()">Sign Out</button>
+          </div>
+        </div>
+
+        <!-- NOTIFICATIONS -->
+        <div class="settings-panel" id="spanel-notifications">
+          <div class="settings-section">
+            <div class="settings-section-title">🔔 <span>Notification</span> Preferences</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">New connection requests</div>
+                <div class="setting-desc">When someone sends you a connection request</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Post likes &amp; reactions</div>
+                <div class="setting-desc">When someone likes or reacts to your posts</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Comments on your posts</div>
+                <div class="setting-desc">When someone comments on your content</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Mentions &amp; tags</div>
+                <div class="setting-desc">When someone mentions you in a post or comment</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Mentorship updates</div>
+                <div class="setting-desc">Session confirmations, cancellations, new requests</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">New job matches</div>
+                <div class="setting-desc">Jobs that match your skills and semester</div>
+              </div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Direct messages</div>
+                <div class="setting-desc">When you receive a new message</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Weekly digest email</div>
+                <div class="setting-desc">Summary of activity and opportunities every Monday</div>
+              </div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRIVACY -->
+        <div class="settings-panel" id="spanel-privacy">
+          <div class="settings-section">
+            <div class="settings-section-title">🛡 <span>Privacy</span> Settings</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Profile visibility</div>
+                <div class="setting-desc">Who can see your full profile</div>
+              </div><select class="settings-select" style="width:140px">
+                <option selected>Everyone</option>
+                <option>Connections only</option>
+                <option>Aptech only</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Show online status</div>
+                <div class="setting-desc">Let others see when you're active</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Show in alumni directory</div>
+                <div class="setting-desc">Appear in the searchable alumni list</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Allow direct messages</div>
+                <div class="setting-desc">Let non-connections message you</div>
+              </div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Show project likes</div>
+                <div class="setting-desc">Display your liked projects on your profile</div>
+              </div><label class="toggle-switch"><input type="checkbox" checked><span
+                  class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Searchable by email</div>
+                <div class="setting-desc">Allow others to find you using your email address</div>
+              </div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- APPEARANCE -->
+        <div class="settings-panel" id="spanel-appearance">
+          <div class="settings-section">
+            <div class="settings-section-title">🎨 <span>Appearance</span></div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Dark mode</div>
+                <div class="setting-desc">Switch between dark and light theme</div>
+              </div><label class="toggle-switch"><input type="checkbox" id="darkModeToggle"
+                  onchange="toggleThemeFromSettings(this)"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:0.75rem">
+              <div class="setting-info">
+                <div class="setting-label">Accent color</div>
+                <div class="setting-desc">Customise APTverse's primary color</div>
+              </div>
+              <div class="color-row">
+                <div class="color-swatch selected" style="background:#FF6B00"
+                  onclick="setAccent('#FF6B00','#FF8C33',this)" title="Orange (default)"></div>
+                <div class="color-swatch" style="background:#7C3AED" onclick="setAccent('#7C3AED','#9461FF',this)"
+                  title="Purple"></div>
+                <div class="color-swatch" style="background:#059669" onclick="setAccent('#059669','#10B981',this)"
+                  title="Green"></div>
+                <div class="color-swatch" style="background:#0EA5E9" onclick="setAccent('#0EA5E9','#38BDF8',this)"
+                  title="Blue"></div>
+                <div class="color-swatch" style="background:#DC2626" onclick="setAccent('#DC2626','#EF4444',this)"
+                  title="Red"></div>
+                <div class="color-swatch" style="background:#F59E0B" onclick="setAccent('#F59E0B','#FBBF24',this)"
+                  title="Amber"></div>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Compact mode</div>
+                <div class="setting-desc">Reduce spacing for a denser layout</div>
+              </div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Reduce animations</div>
+                <div class="setting-desc">Minimise motion for accessibility</div>
+              </div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- DANGER ZONE -->
+        <div class="settings-panel" id="spanel-danger">
+          <div class="settings-section" style="border-color:#ef444440">
+            <div class="settings-section-title" style="color:#ef4444">⚠️ Danger Zone</div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Deactivate account</div>
+                <div class="setting-desc">Temporarily hide your profile and activity from APTverse</div>
+              </div><button class="danger-btn" onclick="showToast('Account deactivated')">Deactivate</button>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-label">Export my data</div>
+                <div class="setting-desc">Download a copy of all your APTverse data</div>
+              </div><button class="upload-btn" onclick="showToast('Export started — check your email')">Export</button>
+            </div>
+            <div class="setting-row" style="border-bottom:none">
+              <div class="setting-info">
+                <div class="setting-label" style="color:#ef4444">Delete account permanently</div>
+                <div class="setting-desc">This will erase all your data and cannot be undone</div>
+              </div><button class="danger-btn" onclick="confirmDelete()">Delete Account</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- GLOBAL SEARCH OVERLAY -->
+  <div class="search-overlay" id="searchOverlay" onclick="handleOverlayClick(event)">
+    <div class="search-box" id="searchBox">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="global-search-input" id="globalSearchInput" placeholder="Search people, projects, jobs, alumni..."
+          oninput="runSearch(this.value)">
+        <button class="search-close" onclick="closeSearch()">ESC</button>
+      </div>
+      <div class="search-tabs">
+        <button class="search-tab active" onclick="setSearchTab('all',this)">All</button>
+        <button class="search-tab" onclick="setSearchTab('people',this)">People</button>
+        <button class="search-tab" onclick="setSearchTab('projects',this)">Projects</button>
+        <button class="search-tab" onclick="setSearchTab('jobs',this)">Jobs</button>
+        <button class="search-tab" onclick="setSearchTab('mentors',this)">Mentors</button>
+      </div>
+      <div class="search-results" id="searchResults">
+        <!-- default: recent / suggestions -->
+        <div class="search-section-label">Suggested</div>
+        <div class="search-result-item"
+          onclick="closeSearch();showPage('alumni',document.querySelectorAll('.nav-btn')[3])">
+          <div class="sr-icon" style="background:#7C3AED">AO</div>
+          <div class="sr-body">
+            <div class="sr-title">Amaka Okonkwo</div>
+            <div class="sr-sub">Software Engineer · Flutterwave</div>
+          </div>
+          <span class="sr-badge">Alumni</span>
+        </div>
+        <div class="search-result-item"
+          onclick="closeSearch();showPage('jobs',document.querySelectorAll('.nav-btn')[4])">
+          <div class="sr-icon square" style="background:#1a1040">🏦</div>
+          <div class="sr-body">
+            <div class="sr-title">Junior Flutter Developer</div>
+            <div class="sr-sub">Kuda Bank · ₦180k/mo</div>
+          </div>
+          <span class="sr-badge">Job</span>
+        </div>
+        <div class="search-result-item"
+          onclick="closeSearch();showPage('showcase',document.querySelectorAll('.nav-btn')[7])">
+          <div class="sr-icon square" style="background:#1a1040">🌆</div>
+          <div class="sr-body">
+            <div class="sr-title">City Guide App</div>
+            <div class="sr-sub">by Mo Flourish · Flutter, Firebase</div>
+          </div>
+          <span class="sr-badge">Project</span>
+        </div>
+      </div>
+      <div class="search-footer">
+        <span>Press <kbd class="search-shortcut">Ctrl K</kbd> to open · <kbd class="search-shortcut">↑↓</kbd> navigate ·
+          <kbd class="search-shortcut">↵</kbd> select</span>
+        <span id="searchCount" style="font-size:0.75rem;color:var(--gray)"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH -->
+  <div class="page auth-page" id="page-auth">
+    <div class="auth-wrap">
+      <div class="auth-left"><canvas class="auth-bg-canvas" id="authCanvas"></canvas>
+        <div class="left-content">
+          <div class="left-badge">🎓 Aptech Exclusive Network</div>
+          <h2>Your career starts with the right <span>connections</span></h2>
+          <p>Join over 2,000 Aptech students and alumni sharing opportunities, mentorship, and real-world experience.
+          </p>
+          <div class="perks">
+            <div class="perk">
+              <div class="perk-icon">📰</div>
+              <div class="perk-text"><strong>Live feed</strong> — share projects and updates</div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon">💼</div>
+              <div class="perk-text"><strong>Job board</strong> — exclusive roles from alumni</div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon">🤝</div>
+              <div class="perk-text"><strong>Mentorship</strong> — guided by professionals</div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon">🚀</div>
+              <div class="perk-text"><strong>Showcase</strong> — display your projects</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-right">
+        <div class="auth-box">
+          <div class="auth-tabs" id="auth-tabs"><button class="tab-btn active" onclick="switchTab('login')">Sign
+              In</button><button class="tab-btn" onclick="switchTab('signup')">Create Account</button></div>
+          <div class="auth-form active" id="form-login">
+            <div class="form-title">Welcome back</div>
+            <div class="form-sub">Sign in to your APTverse account</div>
+            <div class="field"><label>Email address</label><input type="email" placeholder="you@aptech.ng"
+                id="login-email"></div>
+            <div class="field"><label>Password</label>
+              <div class="password-wrap"><input type="password" placeholder="Enter your password"
+                  id="login-password"><button class="toggle-pw" onclick="togglePw('login-password',this)">Show</button>
+              </div>
+            </div>
+            <div class="forgot-row"><a href="#">Forgot password?</a></div><button class="submit-btn"
+              onclick="handleLogin()">Sign In</button>
+            <div class="divider">
+              <hr><span>or continue with</span>
+              <hr>
+            </div>
+            <div class="social-btns"><button class="social-btn">🌐 Google</button><button class="social-btn">💼
+                LinkedIn</button></div>
+            <div class="switch-link">Don't have an account? <a href="#"
+                onclick="switchTab('signup');return false">Create one</a></div>
+          </div>
+          <div class="auth-form" id="form-signup">
+            <div class="form-title">Join APTverse</div>
+            <div class="form-sub">Create your free account in seconds</div>
+            <div class="field">
+              <div class="field-row">
+                <div><label>First name</label><input type="text" placeholder="Mo"></div>
+                <div><label>Last name</label><input type="text" placeholder="Flourish"></div>
+              </div>
+            </div>
+            <div class="field"><label>Email address</label><input type="email" placeholder="you@aptech.ng">
+              <div class="field-hint">Use your Aptech student email if possible</div>
+            </div>
+            <div class="field"><label>Student ID</label><input type="text" placeholder="e.g. Student1625690"></div>
+            <div class="field"><label>Current semester</label><select>
+                <option value="" disabled selected>Select semester</option>
+                <option>Semester 1</option>
+                <option>Semester 2</option>
+                <option>Semester 3</option>
+                <option>Semester 4</option>
+                <option>Alumni</option>
+              </select></div>
+            <div class="field"><label>Password</label>
+              <div class="password-wrap"><input type="password" placeholder="Create a strong password"
+                  id="signup-password" oninput="checkStrength(this.value)"><button class="toggle-pw"
+                  onclick="togglePw('signup-password',this)">Show</button></div>
+              <div class="strength-bar">
+                <div class="strength-seg" id="s1"></div>
+                <div class="strength-seg" id="s2"></div>
+                <div class="strength-seg" id="s3"></div>
+                <div class="strength-seg" id="s4"></div>
+              </div>
+              <div class="field-hint" id="strength-label">Enter a password</div>
+            </div>
+            <div class="terms-row"><input type="checkbox" id="terms"><label for="terms">I agree to the <a href="#">Terms
+                  of Service</a> and <a href="#">Privacy Policy</a></label></div><button class="submit-btn"
+              onclick="handleSignup()">Create Account</button>
+            <div class="divider">
+              <hr><span>or sign up with</span>
+              <hr>
+            </div>
+            <div class="social-btns"><button class="social-btn">🌐 Google</button><button class="social-btn">💼
+                LinkedIn</button></div>
+            <div class="switch-link">Already have an account? <a href="#" onclick="switchTab('login');return false">Sign
+                in</a></div>
+          </div>
+          <div class="success-state" id="success-state">
+            <div class="success-icon">🎉</div>
+            <h3>You're in, Mo Flourish!</h3>
+            <p>Your APTverse account is ready. Welcome to the Aptech community!</p><br><button class="submit-btn"
+              style="max-width:220px;margin:0 auto;display:block"
+              onclick="showPage('feed',document.querySelectorAll('.nav-btn')[1])">Go to Feed →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Request Modal -->
+  <div class="modal-overlay" id="requestModal">
+    <div class="modal"><button class="modal-close" onclick="closeModal()">✕</button>
+      <h3>Request Mentorship</h3>
+      <p id="modalDesc">Send a request to this mentor.</p><textarea rows="5"
+        placeholder="Hi! I'm a Semester 3 student at Aptech Lagos. I'd love guidance on breaking into mobile development and building a strong portfolio..."></textarea>
+      <div class="modal-footer"><button class="modal-cancel" onclick="closeModal()">Cancel</button><button
+          class="modal-send" onclick="sendRequest()">Send Request</button></div>
+    </div>
+  </div>
+
+  <!-- Call Modal -->
+  <div class="call-overlay" id="callOverlay" aria-hidden="true">
+    <div class="call-dialog" role="dialog" aria-modal="true" aria-labelledby="callTitle">
+      <button class="modal-close call-close" type="button" onclick="endCall()" aria-label="Close call">×</button>
+      <div class="call-heading"><span class="call-mode-icon" id="callModeIcon">📹</span>
+        <div>
+          <h3 id="callTitle">Start a call</h3>
+          <p id="callContactName">Choose how you want to connect</p>
+        </div>
+      </div>
+      <div class="call-choice" id="callChoice">
+        <button class="call-choice-btn" type="button" onclick="createCall()"><span>+</span><strong>Start new
+            call</strong><small>Share the generated call ID</small></button>
+        <div class="call-join"><label for="joinCallId">Have a call ID?</label>
+          <div><input id="joinCallId" maxlength="8" placeholder="e.g. A7K2P9"><button type="button"
+              onclick="joinCall()">Join</button></div>
+        </div>
+      </div>
+      <div class="call-active" id="callActive" hidden>
+        <div class="call-video-stage"><video id="remoteVideo" autoplay playsinline></video><video id="localVideo"
+            autoplay muted playsinline></video>
+          <div class="call-audio-avatar" id="callAudioAvatar">MF</div>
+        </div>
+        <div class="call-status" id="callStatus">Connecting...</div>
+        <div class="call-id-wrap"><span>Call ID</span><strong id="activeCallId">----</strong><button type="button"
+            onclick="copyCallId()" title="Copy call ID">Copy</button></div>
+        <div class="call-controls"><button type="button" id="muteCallBtn" onclick="toggleCallMute()"
+            title="Mute microphone">Mute</button><button type="button" id="cameraCallBtn" onclick="toggleCallCamera()"
+            title="Turn camera off">Camera</button><button class="end-call-btn" type="button" onclick="endCall()">End
+            call</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="apt-footer" id="mainFooter">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo" onclick="showPage('home',document.querySelectorAll('.nav-btn')[0])">APT<span
+              style="color:var(--orange)">verse</span></span>
+          <p>All of Aptech, in one universe. Connecting students and alumni across Nigeria and the world.</p>
+          <div class="footer-socials">
+            <a class="footer-social-btn" href="#" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a class="footer-social-btn" href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a class="footer-social-btn" href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a class="footer-social-btn" href="#" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a onclick="showPage('feed',document.querySelectorAll('.nav-btn')[1])">Feed</a>
+          <a onclick="showPage('alumni',document.querySelectorAll('.nav-btn')[3])">Alumni Directory</a>
+          <a onclick="showPage('jobs',document.querySelectorAll('.nav-btn')[4])">Job Board</a>
+          <a onclick="showPage('mentorship',document.querySelectorAll('.nav-btn')[6])">Mentorship</a>
+          <a onclick="showPage('showcase',document.querySelectorAll('.nav-btn')[7])">Showcase</a>
+        </div>
+        <div class="footer-col">
+          <h4>Account</h4>
+          <a onclick="showPage('auth',null)">Sign In</a>
+          <a onclick="showPage('auth',null)">Create Account</a>
+          <a onclick="showPage('profile',document.querySelectorAll('.nav-btn')[2])">My Profile</a>
+          <a onclick="showPage('settings',document.querySelectorAll('.nav-btn')[8])">Settings</a>
+          <a onclick="showPage('chat',document.querySelectorAll('.nav-btn')[5])">Messages</a>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <a>About APTverse</a>
+          <a>Privacy Policy</a>
+          <a>Terms of Service</a>
+          <a>Help Center</a>
+          <a>Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 <span>APTverse</span> · Built by Aptech Lagos students 🇳🇬</div>
+        <div class="footer-bottom-links">
+          <a>Privacy</a>
+          <a>Terms</a>
+          <a>Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+    title="Back to top">↑</button>
+  <script src="index.js?v=20260807-splash-refresh"></script>
+</body>
+
+</html>
