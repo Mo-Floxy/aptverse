@@ -34,7 +34,7 @@
   </div>
   <nav>
     <div class="logo" onclick="showPage('home',null)">APT<span>verse <button class="hamburger-mobile"
-          id="hamburgerMobile" onclick="toggleMobileMenu()" aria-label="Menu">
+         id="hamburgerMobile" onclick="event.stopPropagation(); toggleMobileMenu()" aria-label="Menu">
           <span></span><span></span><span></span>
         </button></span></div>
     <div class="nav-links" id="navLinks">
